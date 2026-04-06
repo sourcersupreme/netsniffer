@@ -47,6 +47,14 @@ def process_packet(packet):
         packet_count.clear()
         port_scan.clear()
         start_time = time.time()
+current_time = time.time()
+packet_count[src] += 1
 
+elapsed = current_time - start_time
+
+if elapsed > 0:
+    rate = packet_count[src] / elapsed
+    if rate > 100:
+        print(f"[ALERT] Possible DoS from {src} ({rate:.2f} pkt/sec)")
 print("🚨 IDS Started...\n")
 sniff(prn=process_packet, store=False)
