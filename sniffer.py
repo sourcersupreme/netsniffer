@@ -2,7 +2,7 @@ from scapy.all import sniff, IP, TCP
 from detector import detect_port_scan
 from logger import log_alert
 from alerts import send_email_alert
-from geoip import get_location
+
 
 def process_packet(packet):
     if packet.haslayer(IP):
