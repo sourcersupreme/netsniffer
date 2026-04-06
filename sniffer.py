@@ -3,7 +3,14 @@ from detector import detect_port_scan
 from logger import log_alert
 from alerts import send_email_alert
 
+import argparse
 
+parser = argparse.ArgumentParser()
+parser.add_argument("--interface", default="eth0", help="Network interface")
+
+args = parser.parse_args()
+
+start_sniffer(args.interface)
 def process_packet(packet):
     if packet.haslayer(IP):
         src = packet[IP].src
